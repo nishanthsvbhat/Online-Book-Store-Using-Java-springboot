@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Store</title>
+    <style>
+    	body{
+    		margin:0px;
+    		padding:0px;
+    		background-color:skyblue;
+    	}
+    	nav{
+    		background-color:#333;
+    		color:white;
+    		font-size:30px;
+    	}
+    	nav a{
+    		text-decoration:none;
+    		color:white;
+    		font-size:15px
+    	}
+        .container {
+            margin: 20px;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 3px solid black;
+        }
+        .btn {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 2px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        .srch{
+        	width:300px;
+        	height:22px;
+        	border-radius:3px;
+        }
+    </style>
+</head>
+<body>
+	<nav>
+        <center><h1>Online Book Store</h1></center>
+        <center>
+        <a class="nav" th:href="@{/admin}">Book List</a>
+        <a class="nav" th:href="@{/admin/buy}">Buy List</a>
+    </nav>
+        </center>
+    <div class="container">
+        <table>
+            <thead>
+                <tr th:if="${buy.size() >=1}">
+                    <th>Book Title</th>
+                    <th>Book Price</th>
+                    <th>Book Price</th>
+                    <th>Buyers Name</th>
+                    <th>Contact Number</th>
+                    <th>Email</th>
+                    <th>Shipping Address</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="buy : ${buy}" >
+                    <td th:text="${buy.title}">Book Title</td>
+                    <td th:text="${buy.price}">Book Price</td>
+                    <td th:text="${buy.quantity}">Quantity</td>
+                    <td th:text="${buy.name}">Buyer Name</td>
+                    <td th:text="${buy.phone}">Contact Number</td>
+                    <td th:text="${buy.email}">Email</td>
+                    <td th:text="${buy.address}">Shipping Address</td>
+                    <td th:text="${buy.status}" th:if="${buy.status == 'Pending'}" style="color: blue;">Status</td>
+                    <td th:text="${buy.status}" th:if="${buy.status == 'Shipped'}" style="color: yellow;">Status</td>
+                    <td th:text="${buy.status}" th:if="${buy.status == 'Delivered'}" style="color: green;">Status</td>
+                    <td th:text="${buy.status}" th:if="${buy.status == 'Cancelled'}" style="color: red;">Status</td>
+                    <td>
+                        <a th:href="@{/admin/buy/update/{id}(id=${buy.id})}" class="btn btn-secondary">Update</a>
+                        <a th:href="@{/admin/buy/delete/{id}(id=${buy.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+         <!--    <a th:href="@{/donors/export}" class="btn btn-secondary">Export to CSV</a> --> 
+        </table>
+    </div>
+</body>
+</html>

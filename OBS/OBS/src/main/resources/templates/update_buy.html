@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Purchase</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: skyblue;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            font-size: 30px;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 15px;
+        }
+        .container {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #007bff;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <center><h1>Online Book Store</h1></center>
+        <center>
+            <a class="nav" th:href="@{/admin}">Book List</a>
+            <a class="nav" th:href="@{/admin/buy}">Buy List</a>
+        </center>
+    </nav>
+    <div class="container">
+        <h2>Update Purchase Details</h2>
+        <form th:action="@{/admin/buy/update/{id}(id=${buy.id})}" method="post">
+            <div class="form-group">
+                <label for="title">Book Title</label>
+                <input type="text" id="title" name="title" readonly="readonly" style="background-color: #f1f1f1;" th:value="${buy.title}" required />
+            </div>
+            <div class="form-group">
+                <label for="price">Book Price</label>
+                <input type="number" id="price" name="price" readonly="readonly" style="background-color: #f1f1f1;" th:value="${buy.price}" required />
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" readonly="readonly" style="background-color: #f1f1f1;" th:value="${buy.quantity}" required />
+            </div>
+            <div class="form-group">
+                <label for="name">Buyer's Name</label>
+                <input type="text" id="name" name="name" readonly="readonly" style="background-color: #f1f1f1;" th:value="${buy.name}" required />
+            </div>
+            <div class="form-group">
+                <label for="phone">Contact Number</label>
+                <input type="text" id="phone" name="phone" readonly="readonly" style="background-color: #f1f1f1;" th:value="${buy.phone}" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" readonly="readonly" style="background-color: #f1f1f1;" th:value="${buy.email}" required />
+            </div>
+            <div class="form-group">
+                <label for="address">Shipping Address</label>
+                <input type="text" id="address" name="address" readonly="readonly" style="background-color: #f1f1f1;" th:value="${buy.address}" required />
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <label for="status" class="form-label">Order Status</label>
+               <!-- <input type="text" class="form-control" id="status" th:field="${buy.status}">-->
+                <select id="status" name="status" required>
+                    <option value="Pending" th:selected="${buy.status == 'Pending'}">Pending</option>
+                    <option value="Shipped" th:selected="${buy.status == 'Shipped'}">Shipped</option>
+                    <option value="Delivered" th:selected="${buy.status == 'Delivered'}">Delivered</option>
+                    <option value="Cancelled" th:selected="${buy.status == 'Cancelled'}">Cancelled</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a th:href="@{/admin/buy}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

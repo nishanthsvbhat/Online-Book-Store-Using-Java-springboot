@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">BookStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#books">Books</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Buy Now Form -->
+    <div class="container my-5">
+        <h2 class="text-center">Complete Your Purchase</h2>
+        <form th:action="@{/books/buy}"  method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Book Title</label>
+                <input type="text" class="form-control" readonly="readonly" style="background-color: #f1f1f1;" id="title" th:field="${buy.title}">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Book Price</label>
+                <input type="text" class="form-control" readonly="readonly" style="background-color: #f1f1f1;" id="price" th:field="${buy.price}">
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="number" class="form-control" readonly="readonly" style="background-color: #f1f1f1;" id="quantity" th:field="${buy.quantity}">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="name" th:field="${buy.name}">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="phone" th:field="${buy.phone}">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" th:field="${buy.email}">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Shipping Address</label>
+                <textarea class="form-control" id="address" rows="3" th:field="${buy.address}" placeholder="Enter your address"></textarea>
+            </div>
+            <input type="submit" value="Buy Now" class="btn btn-primary">
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Online Book Store. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

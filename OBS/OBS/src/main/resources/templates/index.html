@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Store</title>
+    <style>
+    	body{
+    		margin:0px;
+    		padding:0px;
+    		background-color:skyblue;
+    	}
+    	nav{
+    		background-color:#333;
+    		color:white;
+    		font-size:30px;
+    	}
+    	nav a{
+    		text-decoration:none;
+    		color:white;
+    		font-size:15px
+    	}
+        .container {
+            margin: 20px;
+            padding: 20px;
+        }
+        .search-bar {
+            margin: 20px 0;
+        }
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .book-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            background-color:white;
+        }
+        .book-image {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 2px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        .srch{
+        	width:300px;
+        	height:22px;
+        	border-radius:3px;
+        }
+    </style>
+</head>
+<body>
+	<nav>
+        <center><h1>Online Book Store</h1></center>
+        <center>
+        <a class="nav" th:href="@{/admin}">Book List</a>
+        <a class="nav" th:href="@{/admin/buy}">Buy List</a>
+    </nav>
+    <div class="search-bar"> <form th:action ="@{/books/search}">
+                <input type="text" name="keyword" class="srch" placeholder="Search by title...">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        </center>
+    <a th:href="@{/books/new}" class="btn btn-primary">Add Book</a>
+    <div class="container">
+
+        
+		
+        <div class="book-grid">
+            <div th:each="book : ${books}" class="book-card">
+                <img th:src="${book.imageUrl}" alt="Book Image" class="book-image">
+                <h2 th:text="${book.title}">Book Title</h2>
+                <p th:text="'Author: ' + ${book.author}">Author</p>
+                <p th:text="'ISBN: ' + ${book.isbn}">ISBN</p>
+                <p th:text="'Price: $' + ${book.price}">Price</p>
+                <p th:text="'Quantity: ' + ${book.quantity}">Quantity</p>
+                <a th:href="@{/books/edit/{id}(id=${book.id})}" class="btn btn-secondary">Edit</a>
+                <a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
